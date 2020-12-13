@@ -1,0 +1,49 @@
+import java.sql.Date;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+
+public class Main {
+	static Session s;
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	public static void main(String[] args) { 
+		
+		try{
+			createSession();
+		}
+		catch(Exception E){
+			System.out.println("Incorrect session creating!!!");
+		}
+		outputIspolniteli((List<Ispolnitel>)selectAllFrom("Ispolnitel"));
+		s.save(new Ispolnitel("FIO", "MD", 'M', new Date(2002, 1, 1)));
+		outputIspolniteli((List<Ispolnitel>)selectAllFrom("Ispolnitel"));
+		s.close();
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static void createSession() {
+		SessionFactory sessionFactory = null;
+		sessionFactory = new Configuration().buildSessionFactory();
+		s = sessionFactory.openSession();
+		s.beginTransaction();
+	}
+	
+	public static List<?> selectAllFrom(String tablename) {
+		List<?> result = s.createQuery("from "+tablename).list();
+		return result;
+	}
+	
+	public static void outputIspolniteli(List<Ispolnitel> isp) {
+		for(Ispolnitel i : isp) {
+			 System.out.println("Cod_ispolnitelia: "+ i.getCod_ispolnitelia());
+			 System.out.println("FIO_ispolnitelia: "+ i.getFIO_ispolnitelia());
+			 System.out.println("Grajdanstvo: "+ i.getGrajdanstvo());
+			 System.out.println("Pol: "+ i.getPol());
+			 System.out.println("=============================================");
+		 }
+	}
+	
+}

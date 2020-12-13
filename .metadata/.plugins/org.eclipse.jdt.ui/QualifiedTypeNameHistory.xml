@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.vaadin.annotations.Title"/>
+    <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
+    <fullyQualifiedTypeName name="com.vaadin.flow.component.charts.model.Label"/>
+    <fullyQualifiedTypeName name="com.vaadin.flow.component.html.Label"/>
+    <fullyQualifiedTypeName name="com.vaadin.flow.component.button.ButtonVariant"/>
+    <fullyQualifiedTypeName name="com.vaadin.flow.component.Key"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.hibernate.cfg.Configuration"/>
+    <fullyQualifiedTypeName name="org.hibernate.Session"/>
+    <fullyQualifiedTypeName name="org.hibernate.SessionFactory"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.Entity"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.Table"/>
+    <fullyQualifiedTypeName name="javax.persistence.Column"/>
+</qualifiedTypeNameHistroy>

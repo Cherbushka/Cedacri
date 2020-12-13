@@ -1,0 +1,114 @@
+package com.example.test;
+
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.PWA;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * A sample Vaadin view class.
+ * <p>
+ * To implement a Vaadin view just extend any Vaadin component and
+ * use @Route annotation to announce it in a URL as a Spring managed
+ * bean.
+ * Use the @PWA annotation make the application installable on phones,
+ * tablets and some desktop browsers.
+ * <p>
+ * A new instance of this class is created for every new user and every
+ * browser tab/window.
+ */
+@Route
+@PWA(name = "Vaadin Application",
+        shortName = "Vaadin App",
+        description = "This is an example Vaadin application.",
+        enableInstallPrompt = false)
+@CssImport("./styles/shared-styles.css")
+@CssImport(value = "./styles/vaadin-text-field-styles.css", themeFor = "vaadin-text-field")
+public class MainView extends VerticalLayout {
+
+    /**
+     * Construct a new Vaadin view.
+     * <p>
+     * Build the initial UI state for the user accessing the application.
+     *
+     * @param service The message service. Automatically injected Spring managed bean.
+     */
+    public MainView(@Autowired GreetService service) {
+
+    	TextField name = new TextField();
+        name.setThemeName("Username:");
+        name.setMaxLength(20);
+        TextField password = new TextField();
+        password.setMaxLength(20);
+        password.setThemeName("Password");
+        Button button = new Button("Submit");
+        Label submit = new Label();
+        button.addClickListener( e -> {
+        	switch(checkLogin(name.getValue(), password.getValue())) {
+        		case 0:
+        			submit.setText("Successfully registred!");
+        			break;
+        		case 1:
+        			submit.setText("Username should contain at least 6 characters!");
+        			break;
+        		case 2:
+        			submit.setText("Username shouldn't contain space characters!");
+        			break;
+        		case 4:
+        			submit.setText("Username should contain at least 1 letter!");
+        			break;
+        		case 5:
+        			submit.setText("Username shouldn't contain characters besides letters, digits and underscore!");
+        			break;
+        		case 6:
+        			submit.setText("Password should contain at least 6 characters!");
+        			break;
+        		case 7:
+        			submit.setText("Password shouldn't contain space characters!");
+        			break;
+        		case 8:
+        			submit.setText("Password should contain at least 1 digit!");
+        			break;
+        		case 9:
+        			submit.setText("Password should contain at least 1 letter!");
+        			break;
+        		case 10:
+        			submit.setText("Password shouldn't contain characters besides letters, digits and underscore!");
+        			break;
+        	}
+        });
+        
+		add(name, password, button, submit);
+    }
+    
+    private int checkLogin(String name, String pass) {
+    	if(name.length() < 6)
+    		return 1;
+    	else if(name.matches(".*\s.*"))
+    		return 2;
+    	else if(!name.matches(".*[A-Za-z].*"))
+    		return 4;
+    	else if(name.matches(".*[^A-Za-z0-9_].*"))
+    		return 5;
+    	else if(pass.length() < 6)
+    		return 6;
+    	else if(pass.matches(".*\s.*"))
+    		return 7;
+    	else if(!pass.matches(".*[0-9].*"))
+    		return 8;
+    	else if(!pass.matches(".*[A-Za-z].*"))
+    		return 9;
+    	else if(pass.matches(".*[^A-Za-z0-9_].*"))
+    		return 10;
+    	else 
+    		return 0;
+    }
+
+}

@@ -1,0 +1,36 @@
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+
+public class Main {
+
+	public static void main(String[] args) { 
+		SessionFactory sessionFactory = null; 
+		try { 
+			sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession(); session.beginTransaction();
+			List<Ispolnitel> result = session.createQuery("from Ispolnitel").list(); 
+			for(Ispolnitel i : (List<Ispolnitel>) result) { 
+				System.out.println( "id: " + i.getCod_ispolnitelia() + ", nume: " + i.getFIO_ispolnitelia() + ", prenume: " + i.getGrajdanstvo() + ", pol:" + i.getPol()); 
+			}
+			System.out.println("------");
+			session.save(new Ispolnitel());
+			result = session.createQuery("from Student").list(); 
+			for(Ispolnitel i : (List<Ispolnitel>) result) { 
+				System.out.println( "id: " + i.getCod_ispolnitelia() + ", nume: " + i.getFIO_ispolnitelia() + ", prenume: " + i.getGrajdanstvo() + ", pol:" + i.getPol()); 
+			}
+			session.getTransaction().commit(); 
+			session.close(); 
+			} 
+		catch (Exception e) {
+			e.printStackTrace(); 
+		} 
+		finally { 
+			sessionFactory.close(); 
+		} 
+	}
+
+}

@@ -1,0 +1,72 @@
+import java.sql.Date;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Ispolnitel")
+public class Ispolnitel {
+	@Id
+	@Column(name = "Cod_ispolnitelia")
+	private int Cod_ispolnitelia; 
+	@Column(name = "FIO_ispolnitelia")
+	private String FIO_ispolnitelia; 
+	@Column(name = "Grajdanstvo")
+	private String Grajdanstvo; 
+	@Column(name = "Pol")
+	private char Pol;
+	@Column(name = "Data_rojdenia")
+	private Date Data_rojdenia;
+	
+	public Ispolnitel() {
+	
+	}
+	
+	public Ispolnitel(String FIO_ispolnitelia, String Grajdanstvo, char Pol, Date Data_rojdenia) { 
+		this.setData_rojdenia(Data_rojdenia);
+		this.setFIO_ispolnitelia(FIO_ispolnitelia); 
+		this.setGrajdanstvo(Grajdanstvo);
+		this.setPol(Pol); 
+	}
+
+	public int getCod_ispolnitelia() { 
+		return Cod_ispolnitelia; 
+	}
+	
+	public void setCod_ispolnitelia(int Cod_ispolnitelia) { 
+		this.Cod_ispolnitelia = Cod_ispolnitelia; 
+	}
+	
+	public String getFIO_ispolnitelia() { 
+		return FIO_ispolnitelia; 
+	}
+	
+	public void setFIO_ispolnitelia(String FIO_ispolnitelia) { 
+		this.FIO_ispolnitelia = FIO_ispolnitelia; 
+	}
+	
+	public String getGrajdanstvo() { 
+		return Grajdanstvo; 
+	}
+	
+	public void setGrajdanstvo(String Grajdanstvo) { 
+		this.Grajdanstvo = Grajdanstvo; 
+	}
+	
+	public char getPol() { 
+		return Pol; 
+	}
+	
+	public void setPol(char Pol) { 
+		this.Pol = Pol; 
+	}
+	
+	public Date getData_rojdenia() { 
+		return Data_rojdenia; 
+	}
+	
+	public void setData_rojdenia(Date Data_rojdenia) { 
+		this.Data_rojdenia = Data_rojdenia; 
+	} 
+}
